@@ -1,0 +1,14 @@
+{
+  "product": "regulens",
+  "timestamp": 1791718125.870241,
+  "status": "PASSED",
+  "total_benchmark_time_seconds": 3.968,
+  "rule_check_latency_us": 369.1,
+  "frameworks_evaluated": 4,
+  "overall_compliance_score": 43,
+  "risk_tier": "HIGH_RISK",
+  "findings_count": 4,
+  "gpu_audit_latency_ms": 3967.94,
+  "target_system": "OmniCredit Automated Underwriting Engine",
+  "model": "qwen2.5:0.5b"
+}
