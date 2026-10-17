@@ -16,6 +16,7 @@ import {
   FileText,
   Layers,
 } from 'lucide-react';
+import { MarkdownRenderer } from './MarkdownRenderer';
 
 interface FrameworkMatrixTabProps {
   audit: AISystemAudit;
@@ -68,9 +69,7 @@ export const FrameworkMatrixTab: React.FC<FrameworkMatrixTabProps> = ({ audit })
           </div>
         </div>
 
-        <p className="text-sm text-foreground leading-relaxed whitespace-pre-wrap font-sans">
-          {audit.executive_verdict}
-        </p>
+        <MarkdownRenderer content={audit.executive_verdict} defaultMaxHeight="max-h-[500px]" />
 
         <div className="pt-3 border-t border-border flex flex-wrap gap-4 text-xs font-mono text-muted-foreground">
           <span>Deployment Domain: <strong className="text-foreground">{audit.deployment_domain}</strong></span>

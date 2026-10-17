@@ -14,6 +14,7 @@ import {
   Terminal,
   Zap,
 } from 'lucide-react';
+import { MarkdownRenderer } from './MarkdownRenderer';
 
 interface SystemAuditLabTabProps {
   onAuditCreated: (audit: AISystemAudit) => void;
@@ -255,9 +256,7 @@ export const SystemAuditLabTab: React.FC<SystemAuditLabTabProps> = ({
                 <h4 className="text-xs font-bold text-emerald-400 uppercase tracking-wider">
                   Executive Legal Counsel Verdict
                 </h4>
-                <p className="text-xs text-foreground leading-relaxed whitespace-pre-wrap">
-                  {result.executive_verdict}
-                </p>
+                <MarkdownRenderer content={result.executive_verdict} defaultMaxHeight="max-h-[420px]" />
               </div>
 
               {/* Framework Breakdown */}

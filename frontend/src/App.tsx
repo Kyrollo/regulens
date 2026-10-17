@@ -5,18 +5,20 @@ import { AuditFindingsTab } from './components/AuditFindingsTab';
 import { SystemAuditLabTab } from './components/SystemAuditLabTab';
 import { fetchAudits } from './lib/api';
 import { AISystemAudit } from './types/regulens';
+import { FileUploadZone } from './components/FileUploadZone';
 import {
   Scale,
   ShieldAlert,
   Play,
   Loader2,
   AlertTriangle,
+  FolderUp,
 } from 'lucide-react';
 
 export default function App() {
   const [audits, setAudits] = useState<AISystemAudit[]>([]);
   const [selectedAuditId, setSelectedAuditId] = useState<string>('aud-omni-101');
-  const [activeTab, setActiveTab] = useState<'matrix' | 'findings' | 'lab'>('matrix');
+  const [activeTab, setActiveTab] = useState<'matrix' | 'findings' | 'lab' | 'uploads'>('matrix');
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -95,6 +97,18 @@ export default function App() {
             <Play className="w-4 h-4" />
             <span>System Audit Lab</span>
           </button>
+
+          <button
+            onClick={() => setActiveTab('uploads')}
+            className={`py-3 px-4 text-xs font-semibold flex items-center gap-2 border-b-2 transition-colors ${
+              activeTab === 'uploads'
+                ? 'border-emerald-500 text-emerald-400 bg-emerald-500/5'
+                : 'border-transparent text-muted-foreground hover:text-foreground'
+            }`}
+          >
+            <FolderUp className="w-4 h-4" />
+            <span>Compliance Policy Upload</span>
+          </button>
         </div>
       </div>
 
@@ -121,13 +135,31 @@ export default function App() {
               </button>
             </div>
           </div>
-        ) : currentAudit ? (
+        ) : (
           <>
-            {activeTab === 'matrix' && <FrameworkMatrixTab audit={currentAudit} />}
-            {activeTab === 'findings' && <AuditFindingsTab audit={currentAudit} />}
+            {activeTab === 'matrix' && currentAudit && <FrameworkMatrixTab audit={currentAudit} />}
+            {activeTab === 'findings' && currentAudit && <AuditFindingsTab audit={currentAudit} />}
             {activeTab === 'lab' && <SystemAuditLabTab onAuditCreated={handleAuditCreated} />}
+            {activeTab === 'uploads' && (
+              <div className="p-6 max-w-5xl mx-auto space-y-4 overflow-y-auto max-h-[calc(100vh-140px)]">
+                <div>
+                  <h3 className="text-lg font-bold text-foreground">Compliance Policy & Audit Checklist Upload</h3>
+                  <p className="text-xs text-muted-foreground">
+                    Upload governance policies (.pdf, .docx, .txt) to automatically map clauses against EU AI Act, NIST AI RMF, ISO 42001, and GDPR controls.
+                  </p>
+                </div>
+                <FileUploadZone
+                  apiBaseUrl="/api/v1"
+                  allowedExtensions={['.pdf', '.docx', '.txt', '.csv', '.json', '.md']}
+                  acceptedFormatsText="PDF Policies, Word (.docx), TXT, CSV, JSON"
+                  onFileProcessed={() => {
+                    loadAudits();
+                  }}
+                />
+              </div>
+            )}
           </>
-        ) : null}
+        )}
       </main>
     </div>
   );
