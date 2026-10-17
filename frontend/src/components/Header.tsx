@@ -122,7 +122,7 @@ export const Header: React.FC<HeaderProps> = ({
           {/* Local GPU Telemetry Tag */}
           <div className="flex items-center gap-1.5 bg-muted/60 px-3 py-1 rounded-lg border border-border text-xs text-emerald-400 font-medium">
             <Cpu className="w-3.5 h-3.5" />
-            <span>RTX A5000</span>
+            <span>Dedicated NVIDIA GPU</span>
             <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
           </div>
         </div>

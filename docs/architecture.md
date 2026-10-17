@@ -25,7 +25,7 @@ flowchart TD
     end
 
     subgraph Compute["Local GPU Compute"]
-        Ollama["Ollama Engine (RTX A5000 Laptop GPU)\nModel: qwen2.5:0.5b (Port 11434)"]
+        Ollama["Ollama Engine (Dedicated NVIDIA GPU)\nModel: qwen2.5:0.5b (Port 11434)"]
     end
 
     Officer -->|Audits AI Deployments & Inspects Gaps| Frontend
@@ -54,7 +54,7 @@ sequenceDiagram
     participant Classifier as Risk Classifier
     participant Engine as Compliance Engine
     participant Auditor as Auditor Engine
-    participant GPU as Local Ollama GPU (RTX A5000)
+    participant GPU as Local Ollama GPU (Dedicated NVIDIA GPU)
     participant Store as State Store
 
     Officer->>Gateway: POST /api/v1/audits/evaluate (System Details, Domain, Oversight Level)
@@ -82,6 +82,6 @@ sequenceDiagram
 | :--- | :--- | :--- |
 | **Backend Framework** | FastAPI (Python 3.12) | High-throughput asynchronous endpoints with Pydantic v2 schemas and RFC 7807 problem details. |
 | **Compliance Engine** | Deterministic Multi-Framework Evaluator | Microsecond control audits (<370µs) across EU AI Act, NIST AI RMF, ISO 42001, and GDPR. |
-| **Inference Engine** | Local Ollama (`qwen2.5:0.5b`) | Complete corporate confidentiality; private legal analysis on NVIDIA RTX A5000 GPU. |
+| **Inference Engine** | Local Ollama (`qwen2.5:0.5b`) | Complete corporate confidentiality; private legal analysis on NVIDIA Dedicated NVIDIA GPU. |
 | **Frontend UI** | React 18 + Tailwind CSS | Regulatory matrix dashboard with side-by-side framework cards and step-by-step technical remediation plans. |
 | **Zero-Simulation** | Automated Guard Verified | 100% real compliance evaluation and real local GPU generation. |
