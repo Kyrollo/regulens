@@ -6,7 +6,7 @@ build-backend = "hatchling.build"
 name = "regulens"
 version = "1.0.0"
 description = "Regulatory Compliance GraphRAG: knowledge graph mapping legal obligations to technical controls with automated gap analysis"
-readme = "../README.md"
+readme = "README.md"
 authors = [{ name = "Kyrollo", email = "kyrollo@users.noreply.github.com" }]
 requires-python = ">=3.12"
 dependencies = [
